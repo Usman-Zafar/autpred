@@ -8,7 +8,7 @@ import { memberType } from "@/types";
 const TeamCard: FC<{ member: memberType }> = ({ member }) => {
   return (
     <div className="w-1/2 flex flex-col justify-center items-center gap-y-2">
-      <div className="w-full h-[500px] relative overflow-hidden">
+      <div className="w-full h-[250px] md:h-[500px] relative overflow-hidden">
         <Image
           src={member.image}
           alt={member.name}
@@ -57,7 +57,7 @@ const AboutUs = () => {
           spectrum.
         </h3>
         <h2 className="mt-10 text-2xl text-center font-bold mb-8">Our Team</h2>
-        <div className="flex flex-row gap-x-4 w-full">
+        <div className="flex flex-col items-center md:flex-row gap-x-4 w-full">
           {team.map((member) => (
             <TeamCard key={member.id} member={member} />
           ))}
