@@ -19,7 +19,7 @@ const Home = () => {
               </p>
             </div>
             <div className="flex justify-center items-center w-full">
-              <Link href="/get-started">
+              <Link href="/register">
                 <div className="w-fit bg-green-500 text-white px-6 py-2 rounded cursor-pointer ">
                   Get Started
                 </div>

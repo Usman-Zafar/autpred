@@ -1,8 +1,40 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/HomeNavigation";
+import { AddUser } from "@/components/api";
 
-const Home = () => {
+const Signup = () => {
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    type: "",
+  });
+
+  const handleChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value as string,
+    });
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      const response = await AddUser({ ...formData });
+      console.log("Signup response:", response);
+    } catch (error) {
+      console.error("Signup error:", error);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -24,53 +56,71 @@ const Home = () => {
             <h1 className="text-2xl font-bold w-full text-center mb-8">
               Sign Up
             </h1>
-            <div className="w-full flex-col flex gap-y-2">
-              <label className="text-lg font-bold">Email</label>
-              <input
-                type="email"
-                placeholder="Email Address"
-                className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus-active:border-green-500"
-              />
-            </div>
-            <div className="w-full flex-col flex gap-y-2">
-              <label className="text-lg font-bold">Password</label>
-              <input
-                type="password"
-                placeholder="Password"
-                className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus-active:border-green-500"
-              />
-            </div>
-            <div className="w-full flex-col flex gap-y-2">
-              <label className="text-lg font-bold">Sign Up As</label>
-              <div className="flex items-center">
+            <form onSubmit={handleSubmit}>
+              <div className="w-full flex-col flex gap-y-2">
+                <label className="text-lg font-bold">First Name</label>
                 <input
-                  type="radio"
-                  id="caregiver"
-                  value="caregiver"
-                  className="mr-2"
-                  name="radio"
+                  type="firstname"
+                  placeholder="First Name"
+                  className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus-active:border-green-500"
+                  name="firstname"
+                  value={formData.firstname}
+                  onChange={handleChange}
                 />
-                <label htmlFor="caregiver" className="text-lg pr-3">
-                  Caregiver
-                </label>
-                <input
-                  type="radio"
-                  id="therapist"
-                  value="therapist"
-                  className="mr-2"
-                  name="radio"
-                />
-                <label htmlFor="therapist" className="text-lg">
-                  Therapist
-                </label>
               </div>
-            </div>
-            <button
-              type="submit"
-              className="w-full px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600"
-            >
-              Sign up
-            </button>
+              <div className="w-full flex-col flex gap-y-2">
+                <label className="text-lg font-bold">Last Name</label>
+                <input
+                  type="lastname"
+                  placeholder="Last Name"
+                  className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus-active:border-green-500"
+                  name="lastname"
+                  value={formData.lastname}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="w-full flex-col flex gap-y-2">
+                <label className="text-lg font-bold">Email</label>
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus-active:border-green-500"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="w-full flex-col flex gap-y-2">
+                <label className="text-lg font-bold">Password</label>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus-active:border-green-500"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="w-full flex-col flex gap-y-2">
+                <label className="text-lg font-bold">Type</label>
+                <select
+                  className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus-active:border-green-500"
+                  name="type"
+                  value={formData.type}
+                  onChange={handleChange}
+                >
+                  <option value="">Select Type</option>
+                  <option value="caregiver">Caregiver</option>
+                  <option value="therapist">Therapist</option>
+                </select>
+              </div>
+              <button
+                type="submit"
+                className="w-full px-4 mt-2 py-2 rounded bg-green-500 text-white hover:bg-green-600"
+              >
+                Sign Up
+              </button>
+            </form>
           </div>
         </main>
       </div>
@@ -78,4 +128,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Signup;
