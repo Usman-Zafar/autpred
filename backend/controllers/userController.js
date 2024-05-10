@@ -6,7 +6,6 @@ const userControllers = {};
 //agent signup
 userControllers.Signup = async (req, res) => {
   try {
-    console.log(req.body);
     const { email } = req.body;
     const existingUser = await User.findOne({ email });
 

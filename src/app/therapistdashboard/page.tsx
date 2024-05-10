@@ -67,35 +67,24 @@ const therapistdashboard = () => {
           <div className="w-1/3 px-2">
             <span className="bg-white flex flex-col w-full text-left rounded-lg shadow-md p-2 my-2">
               <p>
-                <b>Child Name:</b>User 1
+                <b>Child Name:</b>Umer Abid Ali
               </p>
               <p>
-                <b>Therapy Session:</b>5
+                <b>Therapy Session: </b>5
               </p>
               <p>
-                <b>Therapy Time:</b>12:00
-              </p>
-            </span>
-            <span className="bg-white flex flex-col w-full text-left rounded-lg shadow-md p-2 my-2">
-              <p>
-                <b>Child Name:</b>User 2
-              </p>
-              <p>
-                <b>Therapy Session:</b>2
-              </p>
-              <p>
-                <b>Therapy Time:</b>13:00
+                <b>Therapy Date:</b>2024-05-05
               </p>
             </span>
             <span className="bg-white flex flex-col w-full text-left rounded-lg shadow-md p-2 my-2">
               <p>
-                <b>Child Name:</b>User 5
+                <b>Child Name:</b>Baqir Mohammad
               </p>
               <p>
                 <b>Therapy Session:</b>6
               </p>
               <p>
-                <b>Therapy Time:</b>14:00
+                <b>Therapy Date:</b>2024-05-02 
               </p>
             </span>
           </div>

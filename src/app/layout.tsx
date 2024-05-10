@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../styles/global.css";
+import React from "react";
 // import Navbar from "@/components/HomeNavigation";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,8 +19,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} min-h-screen flex flex-col w-full`}>
+        <React.StrictMode>{children}</React.StrictMode>
         {/* <Navbar /> */}
-        {children}
       </body>
     </html>
   );

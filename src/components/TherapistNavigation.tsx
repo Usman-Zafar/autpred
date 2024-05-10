@@ -1,14 +1,28 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { animated, useSpring } from "react-spring";
 import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function TherapistNavbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const props = useSpring({
     transform: isOpen ? `translate3d(0,0,0)` : `translate3d(-100%,0,0)`,
   });
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setIsAuthenticated(false);
+    window.location.href = "/register";
+  };
 
   return (
     <nav className="flex items-center justify-between p-5 bg-gray-500">
@@ -49,12 +63,21 @@ export default function TherapistNavbar() {
             </Link>
           </div>
           <div>
-            <Link
-              href="/account-details"
-              className="block mt-4 md:inline-block md:mt-0 text-yellow-300 hover:text-yellow-500"
-            >
-              User
-            </Link>
+            {isAuthenticated ? (
+              <button
+                onClick={logout}
+                className="block mt-4 md:inline-block md:mt-0 text-yellow-300 hover:text-yellow-500"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                href="/register"
+                className="block mt-4 md:inline-block md:mt-0 text-yellow-300 hover:text-yellow-500"
+              >
+                Login
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -96,20 +119,25 @@ export default function TherapistNavbar() {
           >
             View Reports
           </Link>
-          <Link
-            href="/add-profile"
-            className="block mt-4 md:inline-block md:mt-0 text-white hover:text-gray-200 mr-4"
-          >
-            Add Profile
-          </Link>
-        </div>
-        <div className="absolute bottom-0 mb-4 px-5">
-          <Link
-            href="/account-details"
-            className="block mt-4 md:inline-block md:mt-0 text-yellow-300 hover:text-yellow-500"
-          >
-            User
-          </Link>
+          {isAuthenticated ? (
+            <div className="absolute bottom-0 mb-4">
+            <button
+              onClick={logout}
+              className="block mt-4 md:inline-block md:mt-0 text-yellow-300 hover:text-yellow-500"
+            >
+              Logout
+            </button>
+            </div>
+          ) : (
+            <div className="absolute bottom-0 mb-4">
+            <Link
+              href="/register"
+              className="block mt-4 md:inline-block md:mt-0  text-yellow-300 hover:text-yellow-500"
+            >
+              Login
+            </Link>
+            </div>
+          )}
         </div>
       </animated.div>
     </nav>

@@ -26,9 +26,8 @@ const Signin = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    try {
+    try { 
       const response = await GetUser({ ...formData });
-      //console.log("Signin response:", response);
       if (response.type === "therapist") router.push("/therapistdashboard");
       else if (response.type === "caregiver")
         router.push("/caregiverdashboard");
