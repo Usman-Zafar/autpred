@@ -4,7 +4,6 @@ const TherapyDetails = require("../modals/therapydetails");
 const therapistControllers = {};
 
 therapistControllers.AddProfile = async (req, res) => {
-  console.log(req.body);
   try {
     await Profile.create({ ...req.body });
     return res.status(200).json({ message: "Profile Added" });
@@ -31,7 +30,6 @@ therapistControllers.GetProfile = async (req, res) => {
 };
 
 therapistControllers.AddTherapyDetails = async (req, res) => {
-  console.log(req.body);
   try {
     await TherapyDetails.create({ ...req.body });
     return res.status(200).json({ message: "Therapy Details Added" });
@@ -43,7 +41,6 @@ therapistControllers.AddTherapyDetails = async (req, res) => {
 
 therapistControllers.GetTherapyDetails = async (req, res) => {
   const { userId } = req.query;
-  console.log(req.query);
   try {
     const existingTherapyDetails = await TherapyDetails.find({ userId });
 

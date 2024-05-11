@@ -31,7 +31,6 @@ userControllers.Signin = async (req, res) => {
   const { email, password } = req.body;
   try {
     const existingUser = await User.findOne({ email });
-    console.log(existingUser.type);
 
     if (!existingUser) {
       return res
@@ -46,9 +45,7 @@ userControllers.Signin = async (req, res) => {
     const token = jwt.sign({ id: existingUser.id }, "Secret-Key", {
       expiresIn: "1h",
     });
-    console.log(existingUser.type);
     res.json({ token, type: existingUser.type });
-    console.log("Login Successful", existingUser.type);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to sign in user" });

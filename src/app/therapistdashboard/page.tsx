@@ -1,10 +1,34 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import TherapistNavbar from "@/components/TherapistNavigation";
 import Link from "next/link";
 import Image from "next/image";
 import Graph from "../../../public/Graph.png";
+import { GetTherapySessions } from "../../components/api";
 
-const therapistdashboard = () => {
+const TherapistDashboard = () => {
+  const [upcomingTherapies, setUpcomingTherapies] = useState<Array<any>>([]);
+  const [therapySessions, setTherapySessions] = useState<Array<any>>([]);
+  useEffect(() => {
+    const fetchTherapySessions = async () => {
+      try {
+        const response = await GetTherapySessions();
+        setTherapySessions([...response.existingTherapyDetails]);
+        // Filter upcoming therapies
+        const now = new Date();
+        const upcoming = therapySessions.filter((session) => {
+          const sessionDateTime = new Date(session.date + "T" + session.time);
+          return sessionDateTime >= now;
+        });
+        setUpcomingTherapies(upcoming);
+      } catch (error) {
+        console.error("Error fetching therapy sessions:", error);
+      }
+    };
+
+    fetchTherapySessions();
+  });
+
   return (
     <>
       <TherapistNavbar />
@@ -65,28 +89,22 @@ const therapistdashboard = () => {
             </p>
           </div>
           <div className="w-1/3 px-2">
-            <span className="bg-white flex flex-col w-full text-left rounded-lg shadow-md p-2 my-2">
-              <p>
-                <b>Child Name:</b>Umer Abid Ali
-              </p>
-              <p>
-                <b>Therapy Session: </b>5
-              </p>
-              <p>
-                <b>Therapy Date:</b>2024-05-05
-              </p>
-            </span>
-            <span className="bg-white flex flex-col w-full text-left rounded-lg shadow-md p-2 my-2">
-              <p>
-                <b>Child Name:</b>Baqir Mohammad
-              </p>
-              <p>
-                <b>Therapy Session:</b>6
-              </p>
-              <p>
-                <b>Therapy Date:</b>2024-05-02 
-              </p>
-            </span>
+            {upcomingTherapies.map((session, index) => (
+              <div
+                key={index}
+                className="bg-white flex flex-col w-full text-left rounded-lg shadow-md p-2 my-2"
+              >
+                <p>
+                  <b>Child Name:</b> {session.childname}
+                </p>
+                <p>
+                  <b>Therapy Session:</b> {session.therapynumber}
+                </p>
+                <p>
+                  <b>Therapy Date:</b> {session.date}
+                </p>
+              </div>
+            ))}
           </div>
           <div className="w-1/3 px-2">
             <Image src={Graph} alt="Graph" />
@@ -97,4 +115,4 @@ const therapistdashboard = () => {
   );
 };
 
-export default therapistdashboard;
+export default TherapistDashboard;
