@@ -5,6 +5,7 @@ const therapistControllers = {};
 
 therapistControllers.AddProfile = async (req, res) => {
   try {
+    req.body.numberoftherapies = 0;
     await Profile.create({ ...req.body });
     return res.status(200).json({ message: "Profile Added" });
   } catch (error) {
@@ -31,6 +32,16 @@ therapistControllers.GetProfile = async (req, res) => {
 
 therapistControllers.AddTherapyDetails = async (req, res) => {
   try {
+    const userId = req.body.userId;
+    const childname = req.body.childname;
+    const profileofchild = await Profile.findOne({ userId, childname });
+    req.body.profileId = profileofchild.id;
+    await Profile.updateOne(
+      { _id: profileofchild.id },
+      { $inc: { numberoftherapies: 1 } }
+    );
+    const therapychild = await Profile.findOne({ _id: profileofchild.id });
+    req.body.therapysession = therapychild.numberoftherapies;
     await TherapyDetails.create({ ...req.body });
     return res.status(200).json({ message: "Therapy Details Added" });
   } catch (error) {
@@ -43,7 +54,6 @@ therapistControllers.GetTherapyDetails = async (req, res) => {
   const { userId } = req.query;
   try {
     const existingTherapyDetails = await TherapyDetails.find({ userId });
-
     if (!existingTherapyDetails || existingTherapyDetails.length === 0) {
       return res.status(404).json({ error: "No Profile Added So Far." });
     }

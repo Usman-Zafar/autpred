@@ -103,7 +103,6 @@ export const GetProfiles = async () => {
 
 export const AddTherapyDetails = async (AddTherapyData: {
   childname: string;
-  therapynumber: number;
   date: string;
   time: string;
   userId: string;

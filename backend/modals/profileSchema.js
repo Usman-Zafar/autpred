@@ -13,7 +13,10 @@ const profileSchema = new Schema({
   parentemail: {
     type: String,
     required: true,
-    unique: true,
+  },
+  numberoftherapies: {
+    type: Number,
+    required: true,
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,

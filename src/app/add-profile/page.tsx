@@ -73,7 +73,7 @@ const AddChildProfile = () => {
               Added Profiles
             </button>
             {profiles.map((profile) => (
-              <div key={profile._id} className="border p-2 my-2">
+              <div key={profile._id} className="border-black border p-2 my-2">
                 <p>Child Name: {profile.childname}</p>
                 <p>Age: {profile.age}</p>
                 <p>Parent Email: {profile.parentemail}</p>

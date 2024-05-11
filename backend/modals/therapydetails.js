@@ -6,12 +6,12 @@ const therapydetailschema = new Schema({
     type: String, 
     required: true,
   },
-  therapynumber: {
-    type: Number,
-    required: true,
-  },
   date: {
     type: String,
+    required: true,
+  },
+  therapysession:{
+    type: Number, 
     required: true,
   },
   time: {
@@ -23,6 +23,11 @@ const therapydetailschema = new Schema({
     ref: "User",
     required: true,
   },
+  profileId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Profile",
+    required: true,
+  }
 });
 
 const TherapyDetails = mongoose.model("TherapyDetails", therapydetailschema);
