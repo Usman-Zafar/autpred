@@ -44,7 +44,7 @@ const TherapistDashboard = () => {
               Therapy Details
             </button>
           </Link>
-          <Link href="/view-reports" className="w-1/3">
+          <Link href="/monthly-reports" className="w-1/3">
             <button className="px-4 py-2 rounded bg-transparent w-full border-green-500 border text-black hover:bg-green-600">
               Monthly Report
             </button>
@@ -98,7 +98,7 @@ const TherapistDashboard = () => {
                   <b>Child Name:</b> {session.childname}
                 </p>
                 <p>
-                  <b>Therapy Session:</b> {session.therapynumber}
+                  <b>Therapy Session:</b> {session.therapysession}
                 </p>
                 <p>
                   <b>Therapy Date:</b> {session.date}

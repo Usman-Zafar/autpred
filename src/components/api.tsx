@@ -9,7 +9,6 @@ export const AddUser = async (signupData: {
   password: string;
   type: string;
 }) => {
-  console.log(signupData);
   try {
     const response = await axios.post(`${BASE_URL}/user/signup`, signupData, {
       headers: {
@@ -21,12 +20,11 @@ export const AddUser = async (signupData: {
     if (response.status === 200 || response.status === 201) {
       const { token, type } = response.data;
       localStorage.setItem("token", token); // Store token for authentication
-      console.log("Signup successful! User type:", type); // Log success message
-      // Optionally redirect to a success page or dashboard based on your app logic
     } else {
       console.error("Signup failed:", response.data.error); // Log error message
       // Display an error message to the user
     }
+    return response.data;
   } catch (error) {
     console.error("Signup error:", error); // Handle network or other errors
     // Display an error message to the user
@@ -37,7 +35,6 @@ export const GetUser = async (signinData: {
   email: string;
   password: string;
 }) => {
-  console.log(signinData);
   try {
     const response = await axios.post(`${BASE_URL}/user/signin`, signinData, {
       headers: {
@@ -47,7 +44,9 @@ export const GetUser = async (signinData: {
     const { token, type } = response.data;
     localStorage.setItem("token", token);
     return response.data;
-  } catch (error) {}
+  } catch (error) {
+    console.error("Signin error:", error);
+  }
 };
 
 export const AddProfile = async (AddProfileData: {

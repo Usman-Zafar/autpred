@@ -1,6 +1,6 @@
-"use client"; 
+"use client";
 import React, { useState } from "react";
-import CaregiverNavbar from "@/components/CaregiverTherapist";
+import CaregiverNavbar from "@/components/CaregiverNavigation";
 
 type ScreeningQuestion = {
   id: number;
@@ -77,7 +77,7 @@ const ASDScreening: React.FC = () => {
       return updatedAnswers;
     });
   };
-  
+
   const calculateScore = () => {
     let score = 0;
     for (let i = 0; i < 9; i++) {
@@ -100,10 +100,10 @@ const ASDScreening: React.FC = () => {
     }
     setIsOpen(true);
   };
-  
+
   return (
     <>
-      <CaregiverNavbar/>
+      <CaregiverNavbar />
       <div className="flex flex-col gap-y-4 px-10 py-10 w-full justify-center items-center">
         <h1 className="text-4xl font-bold py-2">ASD Screening</h1>
         {questions.map((q) => (
@@ -134,7 +134,7 @@ const ASDScreening: React.FC = () => {
         >
           Submit
         </button>
-{isOpen && (
+        {isOpen && (
           <div
             className="fixed z-10 inset-0 overflow-y-auto"
             aria-labelledby="modal-title"

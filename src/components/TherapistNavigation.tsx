@@ -50,7 +50,7 @@ export default function TherapistNavbar() {
               Therapy Details
             </Link>
             <Link
-              href="/view-reports"
+              href="/monthly-reports"
               className="block mt-4 md:inline-block md:mt-0 text-white hover:text-gray-200 mr-4"
             >
               View Reports
@@ -114,7 +114,7 @@ export default function TherapistNavbar() {
             Therapy Details
           </Link>
           <Link
-            href="/view-reports"
+            href="/monthly-reports"
             className="block mt-4 md:inline-block md:mt-0 text-white hover:text-gray-200 mr-4"
           >
             View Reports

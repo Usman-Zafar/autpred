@@ -1,5 +1,5 @@
 import React from "react";
-import CaregiverNavbar from "@/components/CaregiverTherapist";
+import CaregiverNavbar from "@/components/CaregiverNavigation";
 import Link from "next/link";
 import Image from "next/image";
 import Graph from "../../../public/Graph.png";

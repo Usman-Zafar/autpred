@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
 import Navbar from "@/components/HomeNavigation";
 import { AddUser } from "@/components/api";
+import { useRouter } from "next/navigation";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +12,8 @@ const Signup = () => {
     password: "",
     type: "",
   });
+
+  const router = useRouter();
 
   const handleChange = (
     event: React.ChangeEvent<
@@ -29,7 +31,9 @@ const Signup = () => {
 
     try {
       const response = await AddUser({ ...formData });
-      console.log("Signup response:", response);
+      if (response.type === "therapist") router.push("/therapistdashboard");
+      else if (response.type === "caregiver")
+        router.push("/caregiverdashboard");
     } catch (error) {
       console.error("Signup error:", error);
     }

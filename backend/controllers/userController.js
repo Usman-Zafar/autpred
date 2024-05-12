@@ -16,10 +16,10 @@ userControllers.Signup = async (req, res) => {
     }
     const user = await User.create({ ...req.body });
     const { _id: userId, type } = user;
-    const token = jwt.sign({ userId, type }, "Secret-Key", {
+    const token = jwt.sign({ userId }, "Secret-Key", {
       expiresIn: "1h",
     });
-    return res.status(200).json({ token, type });
+    return res.status(200).json({ token, type: user.type });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to sign up user" });

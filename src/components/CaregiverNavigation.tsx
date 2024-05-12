@@ -49,12 +49,6 @@ export default function CaregiverNavbar() {
             >
               View Reports
             </Link>
-            <Link
-              href="/add-profile"
-              className="block mt-4 md:inline-block md:mt-0 text-white hover:text-gray-200 mr-4"
-            >
-              Add Profile
-            </Link>
           </div>
           <div>
             {isAuthenticated ? (
