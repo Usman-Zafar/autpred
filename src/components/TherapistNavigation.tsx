@@ -53,7 +53,7 @@ export default function TherapistNavbar() {
               href="/monthly-reports"
               className="block mt-4 md:inline-block md:mt-0 text-white hover:text-gray-200 mr-4"
             >
-              View Reports
+              Generate Reports
             </Link>
             <Link
               href="/add-profile"
@@ -117,25 +117,25 @@ export default function TherapistNavbar() {
             href="/monthly-reports"
             className="block mt-4 md:inline-block md:mt-0 text-white hover:text-gray-200 mr-4"
           >
-            View Reports
+            Generate Reports
           </Link>
           {isAuthenticated ? (
             <div className="absolute bottom-0 mb-4">
-            <button
-              onClick={logout}
-              className="block mt-4 md:inline-block md:mt-0 text-yellow-300 hover:text-yellow-500"
-            >
-              Logout
-            </button>
+              <button
+                onClick={logout}
+                className="block mt-4 md:inline-block md:mt-0 text-yellow-300 hover:text-yellow-500"
+              >
+                Logout
+              </button>
             </div>
           ) : (
             <div className="absolute bottom-0 mb-4">
-            <Link
-              href="/register"
-              className="block mt-4 md:inline-block md:mt-0  text-yellow-300 hover:text-yellow-500"
-            >
-              Login
-            </Link>
+              <Link
+                href="/register"
+                className="block mt-4 md:inline-block md:mt-0  text-yellow-300 hover:text-yellow-500"
+              >
+                Login
+              </Link>
             </div>
           )}
         </div>

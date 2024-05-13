@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from "react";
 import TherapistNavbar from "@/components/TherapistNavigation";
 import Link from "next/link";
-import Image from "next/image";
-import Graph from "../../../public/Graph.png";
 import { GetTherapySessions } from "../../components/api";
 
 const TherapistDashboard = () => {
@@ -34,24 +32,19 @@ const TherapistDashboard = () => {
       <TherapistNavbar />
       <div className="center-content flex flex-col items-center flex-1 mt-4 w-full">
         <div className="flex justify-center items-center gap-x-2 w-full px-2">
-          <Link href="/asd-screening" className="w-1/3">
+          <Link href="/asd-screening" className="w-1/2">
             <button className="px-4 py-2 rounded bg-transparent w-full border-green-500 border text-black hover:bg-green-600">
               ASD Screening
             </button>
           </Link>
-          <Link href="/therapy-details" className="w-1/3">
+          <Link href="/therapy-details" className="w-1/2">
             <button className="px-4 py-2 rounded bg-transparent w-full border-green-500 border text-black hover:bg-green-600">
               Therapy Details
             </button>
           </Link>
-          <Link href="/monthly-reports" className="w-1/3">
-            <button className="px-4 py-2 rounded bg-transparent w-full border-green-500 border text-black hover:bg-green-600">
-              Monthly Report
-            </button>
-          </Link>
         </div>
         <div className="flex gap-x-2 w-full px-2">
-          <div className="w-1/3 px-2">
+          <div className="w-1/2 px-2">
             <p className=" bg-white flex flex-col w-full text-left rounded-lg shadow-md p-2 my-2">
               Does your child look at you when you call his/her name?
             </p>
@@ -88,7 +81,7 @@ const TherapistDashboard = () => {
               Does your child stare at nothing with no apparent purpose?
             </p>
           </div>
-          <div className="w-1/3 px-2">
+          <div className="w-1/2 px-2">
             {upcomingTherapies.map((session, index) => (
               <div
                 key={index}
@@ -105,9 +98,6 @@ const TherapistDashboard = () => {
                 </p>
               </div>
             ))}
-          </div>
-          <div className="w-1/3 px-2">
-            <Image src={Graph} alt="Graph" />
           </div>
         </div>
       </div>

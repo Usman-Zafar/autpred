@@ -1,5 +1,6 @@
 const Profile = require("../modals/profileSchema");
 const TherapyDetails = require("../modals/therapydetails");
+const Result = require("../modals/resultSchema");
 
 const therapistControllers = {};
 
@@ -61,6 +62,15 @@ therapistControllers.GetTherapyDetails = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to Get Profiles" });
+  }
+};
+
+therapistControllers.AddResults = async (req, res) => {
+  try {
+    await Result.create({ ...req.body });
+    return res.status(200).json({ message: "Result Added" });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to Store Result" });
   }
 };
 

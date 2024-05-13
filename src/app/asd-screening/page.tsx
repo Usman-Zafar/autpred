@@ -1,6 +1,7 @@
-"use client"; 
+"use client";
 import React, { useState } from "react";
 import TherapistNavbar from "@/components/TherapistNavigation";
+import axios from "axios";
 
 type ScreeningQuestion = {
   id: number;
@@ -77,33 +78,51 @@ const ASDScreening: React.FC = () => {
       return updatedAnswers;
     });
   };
-  
+
   const calculateScore = () => {
-    let score = 0;
+    let scoreArray = [];
     for (let i = 0; i < 9; i++) {
       if (["Sometimes", "Rarely", "Never"].includes(answers[i])) {
-        score += 1;
+        scoreArray.push(1);
+      } else {
+        scoreArray.push(0);
       }
     }
     if (["Always", "Usually", "Sometimes"].includes(answers[9])) {
-      score += 1;
+      scoreArray.push(1);
+    } else {
+      scoreArray.push(0);
     }
-    return score;
+    return scoreArray;
   };
 
-  const handleSubmit = () => {
-    const score = calculateScore();
-    if (score > 3) {
-      setResult("There are potential ASD traits observed.");
-    } else {
-      setResult("No ASD traits are observed.");
+  const handleSubmit = async () => {
+    const scoreArray = calculateScore();
+    console.log(scoreArray);
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/predict_module_1/",
+        scoreArray
+      );
+      if (response.status === 200) {
+        if (response.data.message == "YES"){
+          setResult("There are potential ASD traits observed.");
+        }
+        else{
+          setResult("No ASD Traits Observed")
+        }
+      } else {
+        console.error("Failed to fetch");
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
     setIsOpen(true);
   };
-  
+
   return (
     <>
-      <TherapistNavbar/>
+      <TherapistNavbar />
       <div className="flex flex-col gap-y-4 px-10 py-10 w-full justify-center items-center">
         <h1 className="text-4xl font-bold py-2">ASD Screening</h1>
         {questions.map((q) => (
@@ -134,7 +153,7 @@ const ASDScreening: React.FC = () => {
         >
           Submit
         </button>
-{isOpen && (
+        {isOpen && (
           <div
             className="fixed z-10 inset-0 overflow-y-auto"
             aria-labelledby="modal-title"

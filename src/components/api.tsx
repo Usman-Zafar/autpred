@@ -1,6 +1,6 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "http://localhost:5000";
 
 export const AddUser = async (signupData: {
   firstname: string;
@@ -148,5 +148,29 @@ export const GetTherapySessions = async () => {
     }
   } catch (error) {
     console.error("Error decoding token:", error);
+  }
+};
+
+export const ChildResult = async (
+  mostEffective: string,
+  secondMostEffective: string,
+  leastEffective: string,
+  selectedProfileId: string
+) => {
+  try {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken: any = jwtDecode(token); // Casting to any type
+      const userId = decodedToken.id;
+      await axios.post(`${BASE_URL}/therapist/result`, {
+        userId: userId,
+        profileId: selectedProfileId,
+        mosteffective: mostEffective,
+        secondmosteffective: secondMostEffective,
+        leastmosteffective: leastEffective,
+      });
+    }
+  } catch (error) {
+    console.error("Error sending data to backend:", error);
   }
 };
