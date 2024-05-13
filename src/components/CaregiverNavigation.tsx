@@ -60,7 +60,7 @@ export default function CaregiverNavbar() {
               </button>
             ) : (
               <Link
-                href="/login"
+                href="/register"
                 className="block mt-4 md:inline-block md:mt-0 text-yellow-300 hover:text-yellow-500"
               >
                 Login
@@ -119,7 +119,7 @@ export default function CaregiverNavbar() {
           ) : (
             <div className="absolute bottom-0 mb-4">
               <Link
-                href="/login"
+                href="/register"
                 className="block mt-4 md:inline-block md:mt-0 text-yellow-300 hover:text-yellow-500"
               >
                 Login

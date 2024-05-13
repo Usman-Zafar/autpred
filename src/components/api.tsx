@@ -174,3 +174,23 @@ export const ChildResult = async (
     console.error("Error sending data to backend:", error);
   }
 };
+
+export const GetResult = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken: any = jwtDecode(token); // Casting to any type
+      const userId = decodedToken.id;
+      const response = await axios.get(
+        `${BASE_URL}/caregiver/get-therapy-result?userId=${userId}`
+      );
+      console.log(response.data);
+      return response.data;
+    } else {
+      // Handle case where token is not found in local storage
+      console.error("Token not found in local storage");
+    }
+  } catch (error) {
+    console.log("Unable to get Results", error);
+  }
+};
